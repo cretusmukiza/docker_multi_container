@@ -4,7 +4,7 @@ services:
 before_install:
     - docker build -t cretus/client -f ./client/Dockerfile.dev ./client
 scripts:
-    - docker run cretus/client npm run test -- --coverage
+    - docker run -e CI=true cretus/client npm run test -- --coverage
 after_success:
     - docker build cretus/multi-client ./client
     - docker build cretus/multi-nginx ./nginx
