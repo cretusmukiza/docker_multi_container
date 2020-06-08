@@ -1,0 +1,19 @@
+sudo: required
+services:
+    - docker
+before_install:
+    - docker build -t cretus/client -f ./client/Dockerfile.dev .
+scripts:
+    - docker run cretus/client npm test -- --coverage
+after_success:
+    - docker build cretus/multi-client ./client
+    - docker build cretus/multi-nginx ./nginx
+    - docker build cretus/multi-server ./server
+    - docker build cretus/multi-worker ./worker
+    #Login to docker hub
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    #Push images to docker hub
+    - docker push cretus/multi-cretus
+    - docker push cretus/multi-nginx
+    - docker push cretus/multi-server
+    - docker push cretus/multi-worker
