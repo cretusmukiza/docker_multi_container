@@ -2,18 +2,18 @@ sudo: required
 services:
     - docker
 before_install:
-    - docker build -t cretus/client -f ./client/Dockerfile.dev ./client
+    - docker build -t mukiza13/client -f ./client/Dockerfile.dev ./client
 scripts:
-    - docker run -e CI=true cretus/client npm run test -- --coverage
+    - docker run -e CI=true mukiza13/client npm run test -- --coverage
 after_success:
-    - docker build cretus/multi-client ./client
-    - docker build cretus/multi-nginx ./nginx
-    - docker build cretus/multi-server ./server
-    - docker build cretus/multi-worker ./worker
+    - docker build mukiza13/multi-client ./client
+    - docker build mukiza13/multi-nginx ./nginx
+    - docker build mukiza13/multi-server ./server
+    - docker build mukiza13/multi-worker ./worker
     #Login to docker hub
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     #Push images to docker hub
-    - docker push cretus/multi-client
-    - docker push cretus/multi-nginx
-    - docker push cretus/multi-server
-    - docker push cretus/multi-worker
+    - docker push mukiza13/multi-client
+    - docker push mukiza13/multi-nginx
+    - docker push mukiza13/multi-server
+    - docker push mukiza13/multi-worker
