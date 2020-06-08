@@ -6,14 +6,14 @@ before_install:
 scripts:
     - docker run -e CI=true mukiza13/client npm run test -- --coverage
 after_success:
-    - docker build $DOCKER_ID/multi-client ./client
-    - docker build $DOCKER_ID/multi-nginx ./nginx
-    - docker build $DOCKER_ID/multi-server ./server
-    - docker build $DOCKER_ID/multi-worker ./worker
+    - docker build -t mukiza13/multi-client ./client
+    - docker build -t mukiza13/multi-nginx ./nginx
+    - docker build -t mukiza13/multi-server ./server
+    - docker build -t mukiza13/multi-worker ./worker
     #Login to docker hub
-    - docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     #Push apps images to docker 
-    - docker push $DOCKER_ID/multi-client
-    - docker push $DOCKER_ID/multi-nginx
-    - docker push $DOCKER_ID/multi-server
-    - docker push $DOCKER_ID/multi-worker
+    - docker push mukiza13/multi-client
+    - docker push mukiza13/multi-nginx
+    - docker push mukiza13/multi-server
+    - docker push mukiza13/multi-worker
