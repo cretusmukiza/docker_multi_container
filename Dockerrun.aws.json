@@ -1,36 +1,45 @@
 {
-  "AWSEBDockerrunVersion": 2,
-  "containerDefinitions": [
-    {
-      "name": "client",
-      "image": "mukiza13/multi-client",
-      "hostname": "client",
-      "essential": false
-    },
-    {
-      "name": "server",
-      "image": "mukiza13/multi-server",
-      "hostname": "api",
-      "essential": false
-    },
-    {
-      "name": "worker",
-      "image": "mukiza13/multi-worker",
-      "hostname": "worker",
-      "essential": false
-    },
-    {
-      "name": "nginx",
-      "image": "mukiza13/multi-nginx",
-      "hostname": "nginx",
-      "essential": true,
-      "portMappings": [
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions":[
         {
-          "hostPort": 80,
-          "containerPort": 80
-        }
-      ],
-      "links": ["server", "client"]
-    }
-  ]
+            "name": "client",
+            "image":"mukiza13/multi-client",
+            "hostname": "client",
+            "essential": false,
+            "memory": 128,
+            "cpu": 1
+        },
+        {
+            "name": "server",
+            "image":"mukiza13/multi-server",
+            "hostname": "api",
+            "essential": false,
+            "memory": 128,
+            "cpu": 1
+        },
+        {
+            "name": "worker",
+            "image":"mukiza13/multi-worker",
+            "hostname": "worker",
+            "essential": false,
+            "memory": 128,
+            "cpu": 1
+        },
+        {
+            "name": "nginx",
+            "image":"mukiza13/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": ["server","client"],
+            "memory": 128,
+            "cpu": 1
+        }       
+    ]
+    
 }
