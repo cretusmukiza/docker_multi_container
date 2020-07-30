@@ -29,7 +29,7 @@
             "name": "nginx",
             "image":"mukiza13/multi-nginx",
             "hostname": "nginx",
-            "essential": false,
+            "essential": true,
             "portMappings": [
                 {
                     "hostPort": 80,
