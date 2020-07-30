@@ -21,8 +21,8 @@ after_success:
 deploy:
     provider: elasticbeanstalk
     region: us-west-2
-    app: multi-complex
-    env: MultiComplex-env
+    app: base_test
+    env: BaseTest-env
     bucket_name: elasticbeanstalk-us-west-2-275267023652
     bucket_path: multi-complex
     on:
